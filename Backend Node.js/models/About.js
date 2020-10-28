@@ -5,39 +5,39 @@ const { Schema } = mongoose;
 const aboutSchema = new Schema({
 	image: {
 		type: String,
-		required: true
+		// required: true
 	},
 	uz: {
 		title: {
 			type: String,
-			required: true
+			// required: true
 		},
 		body: {
 			type: String,
-			required: true
+			// required: true
 		},
 		address: {
 			type: String,
-			required: true
+			// required: true
 		}
 	},
 	ru: {
 		title: {
 			type: String,
-			required: true
+			// required: true
 		},
 		body: {
 			type: String,
-			required: true
+			// required: true
 		},
 		address: {
 			type: String,
-			required: true
+			// required: true
 		}
 	},
 	email: {
 		type: String,
-		required: true
+		// required: true
 	},
 	phone: [String],
 	instagram: String,

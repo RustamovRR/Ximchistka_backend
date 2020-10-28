@@ -5,26 +5,26 @@ const { Schema } = mongoose;
 const serviceSchema = new Schema({
 	image: {
 		type: String,
-		required: true
+		// required: true
 	},
 	uz: {
 		title: {
 			type: String,
-			required: true
+			// required: true
 		},
 		type: {
 			type: String,
-			required: true
+			// required: true
 		}
 	},
 	ru: {
 		title: {
 			type: String,
-			required: true
+			// required: true
 		},
 		type: {
 			type: String,
-			required: true
+			// required: true
 		}
 	},
 	date: {
@@ -33,7 +33,7 @@ const serviceSchema = new Schema({
 	},
 	price: {
 		type: Number,
-		required: true
+		// required: true
 	}
 });
 
