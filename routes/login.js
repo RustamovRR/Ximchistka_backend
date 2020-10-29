@@ -8,8 +8,7 @@ router.post('/', async (req, res) => {
 
 		if (admin) {
 			if (admin.password === req.body.password) {
-				res.redirect('http://localhost:3000/admin/gallery')
-				return res.status(200).json({
+				return res.json({
 					success: true,
 					message: "Tasdiqlandi!"
 				})
