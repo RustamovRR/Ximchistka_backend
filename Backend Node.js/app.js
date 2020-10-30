@@ -40,11 +40,11 @@ app.use(function (req, res, next) {
 	next();
 });
 
-app.use('/uploads', express.static('uploads'));
-app.use('/about', aboutRoute);
-app.use('/login', loginRoute);
-app.use('/service', serviceRoute);
-app.use('/gallery', galleryRoute);
+app.use('/api/uploads', express.static('uploads'));
+app.use('/api/about', aboutRoute);
+app.use('/api/login', loginRoute);
+app.use('/api/service', serviceRoute);
+app.use('/api/gallery', galleryRoute);
 
 app.get('/', (req, res) => {
 	res.send('hello')
