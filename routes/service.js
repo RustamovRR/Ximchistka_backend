@@ -3,14 +3,19 @@ const router = express.Router();
 const Service = require('../models/Service');
 const multer = require('multer');
 const fs = require('fs');
+require('dotenv/config');
+
+const admin_url = process.env.admin_url
+const localhost = process.env.backend
+const frontend = process.env.frontend
 
 const storage = multer.diskStorage({
-	destination: function(req, file, cb) {
+	destination: function (req, file, cb) {
 		cb(null, './uploads/');
 	},
-	filename: function(req, file, cb) {
+	filename: function (req, file, cb) {
 		const type = file.originalname.split('.');
-		cb(null, `${new Date().getTime()}.${ type[type.length - 1] }`);
+		cb(null, `${new Date().getTime()}.${type[type.length - 1]}`);
 	}
 });
 
@@ -29,15 +34,15 @@ const upload = multer({
 
 function deleteFile(path) {
 	fs.stat(path, function (err, stats) {
-	   	if (err) {
-	    	return console.error(err);
-	   	}
+		if (err) {
+			return console.error(err);
+		}
 
-	   	fs.unlink(path, function(err) {
-	        if(err) {
-	        	return console.log(err);
-	   		}
-	   	});  
+		fs.unlink(path, function (err) {
+			if (err) {
+				return console.log(err);
+			}
+		});
 	});
 }
 
@@ -71,7 +76,8 @@ router.post('/', upload.single('image'), async (req, res) => {
 		});
 
 		const saved = await servise.save();
-		res.status(200).json(saved);	
+		res.redirect(`http://localhost:3000/${admin_url}`)
+		// res.status(200).json(saved);	
 	}
 	catch (err) {
 		res.status(400).json({
@@ -94,7 +100,7 @@ router.patch('/:id', async (req, res) => {
 						title: req.body.ru.title,
 						type: req.body.ru.type
 					},
-					price: req.body.price			
+					price: req.body.price
 				}
 			}, { new: true }
 		);
@@ -105,7 +111,7 @@ router.patch('/:id', async (req, res) => {
 		res.status(400).json({
 			success: false,
 			message: err.message
-		});		
+		});
 	}
 });
 

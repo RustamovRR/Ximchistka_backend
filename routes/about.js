@@ -3,14 +3,19 @@ const router = express.Router();
 const About = require('../models/About');
 const multer = require('multer');
 const fs = require('fs');
+require('dotenv/config');
+
+const admin_url = process.env.admin_url
+const localhost = process.env.backend
+const frontend = process.env.frontend
 
 const storage = multer.diskStorage({
-	destination: function(req, file, cb) {
+	destination: function (req, file, cb) {
 		cb(null, './uploads/');
 	},
-	filename: function(req, file, cb) {
+	filename: function (req, file, cb) {
 		const type = file.originalname.split('.');
-		cb(null, `${new Date().getTime()}.${ type[type.length - 1] }`);
+		cb(null, `${new Date().getTime()}.${type[type.length - 1]}`);
 	}
 });
 
@@ -29,15 +34,15 @@ const upload = multer({
 
 function deleteFile(path) {
 	fs.stat(path, function (err, stats) {
-	   	if (err) {
-	    	return console.error(err);
-	   	}
+		if (err) {
+			return console.error(err);
+		}
 
-	   	fs.unlink(path, function(err) {
-	        if(err) {
-	        	return console.log(err);
-	   		}
-	   	});  
+		fs.unlink(path, function (err) {
+			if (err) {
+				return console.log(err);
+			}
+		});
 	});
 }
 
@@ -77,7 +82,8 @@ router.post('/', async (req, res) => {
 		});
 
 		const saved = await about.save();
-		res.status(200).json(saved);
+		res.redirect(`http://localhost:3000/${admin_url}`)
+		// res.status(200).json(saved);
 	}
 	catch (err) {
 		res.status(400).json({
@@ -126,7 +132,7 @@ router.patch('/', async (req, res) => {
 router.patch('/image', upload.single('image'), async (req, res) => {
 	try {
 		const about = await About.findById("5f9400e6d620c9193c5f1fd3");
-		if(about.image) {
+		if (about.image) {
 			deleteFile(about.image);
 		}
 		about.image = `uploads/${req.file.filename}`;

@@ -3,14 +3,19 @@ const router = express.Router();
 const Gallery = require('../models/Gallery');
 const multer = require('multer');
 const fs = require('fs');
+require('dotenv/config');
+
+const admin_url = process.env.admin_url
+const localhost = process.env.backend
+const frontend = process.env.frontend
 
 const storage = multer.diskStorage({
-	destination: function(req, file, cb) {
+	destination: function (req, file, cb) {
 		cb(null, './uploads/');
 	},
-	filename: function(req, file, cb) {
+	filename: function (req, file, cb) {
 		const type = file.originalname.split('.');
-		cb(null, `${new Date().getTime()}.${ type[type.length - 1] }`);
+		cb(null, `${new Date().getTime()}.${type[type.length - 1]}`);
 	}
 });
 
@@ -29,15 +34,15 @@ const upload = multer({
 
 function deleteFile(path) {
 	fs.stat(path, function (err, stats) {
-	   	if (err) {
-	    	return console.error(err);
-	   	}
+		if (err) {
+			return console.error(err);
+		}
 
-	   	fs.unlink(path, function(err) {
-	        if(err) {
-	        	return console.log(err);
-	   		}
-	   	});  
+		fs.unlink(path, function (err) {
+			if (err) {
+				return console.log(err);
+			}
+		});
 	});
 }
 
@@ -75,15 +80,19 @@ router.post('/', upload.single('image'), async (req, res) => {
 	}
 });
 
-router.delete('/:id', async (req, res) => {
+
+// Delete method/////////////
+router.post('/:id', async (req, res) => {
 	try {
 		const gallery = await Gallery.findById(req.params.id);
 		deleteFile(gallery.image);
 		await gallery.remove();
-		res.status(200).json({
-			success: true,
-			message: "Muvaffaqiyatli o'chirildi!"
-		});
+
+		res.redirect(`http://localhost:3000/${admin_url}`)
+		// res.status(200).json({
+		// 	success: true,
+		// 	message: "Muvaffaqiyatli o'chirildi!"
+		// });
 	}
 	catch (err) {
 		res.status(400).json({
