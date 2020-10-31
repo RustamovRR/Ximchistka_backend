@@ -76,7 +76,7 @@ router.post('/', upload.single('image'), async (req, res) => {
 		});
 
 		const saved = await servise.save();
-		res.redirect(`http://localhost:3000/${admin_url}`)
+		res.redirect(`http://ximchistka24.uz/${admin_url}`)
 		// res.status(200).json(saved);	
 	}
 	catch (err) {
