@@ -11,10 +11,11 @@ router.post('/', async (req, res) => {
 
 		if (admin) {
 			if (admin.password === req.body.password) {
-				return res.json({
-					success: true,
-					message: "Tasdiqlandi!"
-				})
+				res.redirect(`http://ximchistka24.uz/${admin_url}`)
+// 				return res.json({
+// 					success: true,
+// 					message: "Tasdiqlandi!"
+// 				})
 			}
 		}
 
