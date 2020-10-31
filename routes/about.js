@@ -82,7 +82,7 @@ router.post('/', async (req, res) => {
 		});
 
 		const saved = await about.save();
-		res.redirect(`http://localhost:3000/${admin_url}`)
+		res.redirect(`http://ximchistka24.uz/${admin_url}`)
 		// res.status(200).json(saved);
 	}
 	catch (err) {
