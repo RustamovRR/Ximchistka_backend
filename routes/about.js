@@ -64,16 +64,9 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
 	try {
 		const about = new About({
-			uz: {
-				title: req.body.uz.title,
-				body: req.body.uz.body,
-				address: req.body.uz.address
-			},
-			ru: {
-				title: req.body.ru.title,
-				body: req.body.ru.body,
-				address: req.body.ru.address
-			},
+			title: req.body.title,
+			body: req.body.body,
+			address: req.body.address,
 			email: req.body.email,
 			phone: req.body.phone,
 			instagram: req.body.instagram,
@@ -82,7 +75,7 @@ router.post('/', async (req, res) => {
 		});
 
 		const saved = await about.save();
-		res.redirect(`http://localhost:3000/${admin_url}`)
+		res.redirect(`http://ximchistka24.uz/${admin_url}`)
 		// res.status(200).json(saved);
 	}
 	catch (err) {
@@ -98,16 +91,9 @@ router.patch('/', async (req, res) => {
 		const about = await About.findByIdAndUpdate("5f9400e6d620c9193c5f1fd3",
 			{
 				$set: {
-					uz: {
-						title: req.body.uz.title,
-						body: req.body.uz.body,
-						address: req.body.uz.address
-					},
-					ru: {
-						title: req.body.ru.title,
-						body: req.body.ru.body,
-						address: req.body.ru.address
-					},
+					title: req.body.title,
+					body: req.body.body,
+					address: req.body.address,
 					email: req.body.email,
 					phone: req.body.phone,
 					instagram: req.body.instagram,

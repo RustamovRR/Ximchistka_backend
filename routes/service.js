@@ -64,19 +64,13 @@ router.post('/', upload.single('image'), async (req, res) => {
 	try {
 		const servise = new Service({
 			image: `uploads/${req.file.filename}`,
-			uz: {
-				title: req.body.uz.title,
-				type: req.body.uz.type
-			},
-			ru: {
-				title: req.body.ru.title,
-				type: req.body.ru.type
-			},
+			title: req.body.title,
+			type: req.body.type,
 			price: req.body.price
 		});
 
 		const saved = await servise.save();
-		res.redirect(`http://localhost:3000/${admin_url}`)
+		res.redirect(`${frontend}/${admin_url}`)
 		// res.status(200).json(saved);	
 	}
 	catch (err) {
@@ -92,14 +86,8 @@ router.patch('/:id', async (req, res) => {
 		const update = await Service.findByIdAndUpdate(req.params.id,
 			{
 				$set: {
-					uz: {
-						title: req.body.uz.title,
-						type: req.body.uz.type
-					},
-					ru: {
-						title: req.body.ru.title,
-						type: req.body.ru.type
-					},
+					title: req.body.title,
+					type: req.body.type,
 					price: req.body.price
 				}
 			}, { new: true }

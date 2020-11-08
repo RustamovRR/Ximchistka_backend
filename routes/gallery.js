@@ -88,7 +88,7 @@ router.post('/:id', async (req, res) => {
 		deleteFile(gallery.image);
 		await gallery.remove();
 
-		res.redirect(`http://localhost:3000/${admin_url}`)
+		res.redirect(`http://ximchistka24.uz/${admin_url}`)
 		// res.status(200).json({
 		// 	success: true,
 		// 	message: "Muvaffaqiyatli o'chirildi!"
