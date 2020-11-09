@@ -7,6 +7,7 @@ require('dotenv/config');
 
 // routes
 const loginRoute = require('./routes/login');
+const welcomeRoute = require('./routes/welcome');
 const aboutRoute = require('./routes/about');
 const galleryRoute = require('./routes/gallery');
 const serviceRoute = require('./routes/service');
@@ -41,6 +42,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/api/uploads', express.static('uploads'));
+app.use('/api/welcome', welcomeRoute);
 app.use('/api/about', aboutRoute);
 app.use('/api/login', loginRoute);
 app.use('/api/service', serviceRoute);

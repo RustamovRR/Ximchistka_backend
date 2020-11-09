@@ -7,39 +7,24 @@ const aboutSchema = new Schema({
 		type: String,
 		// required: true
 	},
-	uz: {
-		title: {
-			type: String,
-			// required: true
-		},
-		body: {
-			type: String,
-			// required: true
-		},
-		address: {
-			type: String,
-			// required: true
-		}
+	title: {
+		type: String,
+		// required: true
 	},
-	ru: {
-		title: {
-			type: String,
-			// required: true
-		},
-		body: {
-			type: String,
-			// required: true
-		},
-		address: {
-			type: String,
-			// required: true
-		}
+	body: {
+		type: String,
+		// required: true
+	},
+	address: {
+		type: String,
+		// required: true
 	},
 	email: {
 		type: String,
 		// required: true
 	},
-	phone: [String],
+	phone1: String,
+	phone2: String,
 	instagram: String,
 	telegram: String,
 	facebook: String

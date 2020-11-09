@@ -7,32 +7,20 @@ const serviceSchema = new Schema({
 		type: String,
 		// required: true
 	},
-	uz: {
-		title: {
-			type: String,
-			// required: true
-		},
-		type: {
-			type: String,
-			// required: true
-		}
+	title: {
+		type: String,
+		// required: true
 	},
-	ru: {
-		title: {
-			type: String,
-			// required: true
-		},
-		type: {
-			type: String,
-			// required: true
-		}
+	type: {
+		type: String,
+		// required: true
 	},
 	date: {
 		type: Date,
 		default: Date.now
 	},
 	price: {
-		type: Number,
+		type: String,
 		// required: true
 	}
 });

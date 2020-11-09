@@ -49,7 +49,7 @@ function deleteFile(path) {
 
 router.get('/', async (req, res) => {
 	try {
-		const data = await About.findById("5f9400e6d620c9193c5f1fd3");
+		const data = await About.findById('5fa81e341f39c03a2c756fc5');
 
 		res.status(200).json(data);
 	}
@@ -68,7 +68,8 @@ router.post('/', async (req, res) => {
 			body: req.body.body,
 			address: req.body.address,
 			email: req.body.email,
-			phone: req.body.phone,
+			phone1: req.body.phone1,
+			phone2: req.body.phone2,
 			instagram: req.body.instagram,
 			telegram: req.body.telegram,
 			facebook: req.body.facebook
@@ -86,25 +87,41 @@ router.post('/', async (req, res) => {
 	}
 });
 
-router.patch('/', async (req, res) => {
+// Edit about//////////////////////////////////////////////////
+router.get('/:id', async (req, res) => {
 	try {
-		const about = await About.findByIdAndUpdate("5f9400e6d620c9193c5f1fd3",
+		const about = await About.findById('5fa81e341f39c03a2c756fc5');
+		// res.status(200).json({
+		// 	success: true,
+		// 	message: "Xizmat muvaffaqiyatli o'chirildi!"
+		// });
+	}
+	catch (err) {
+		res.status(400).json({
+			success: false,
+			message: err.message
+		});
+	}
+});
+
+router.post('/:id', async (req, res) => {
+	try {
+		const about = await About.findByIdAndUpdate(req.params.id,
 			{
 				$set: {
 					title: req.body.title,
 					body: req.body.body,
 					address: req.body.address,
 					email: req.body.email,
-					phone: req.body.phone,
-					instagram: req.body.instagram,
-					telegram: req.body.telegram,
-					facebook: req.body.facebook
+					phone1: req.body.phone1,
+					phone2: req.body.phone2,
 				}
 			}, { new: true }
 		);
 
 		const saved = await about.save();
-		res.status(200).json(saved);
+		res.redirect(`http://ximchistka24.uz/${admin_url}`)
+		// res.status(200).json(saved);
 	}
 	catch (err) {
 		res.status(400).json({

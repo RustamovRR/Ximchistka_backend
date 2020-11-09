@@ -60,18 +60,18 @@ router.get('/', async (req, res) => {
 	}
 });
 
-router.post('/', upload.single('image'), async (req, res) => {
+router.post('/', async (req, res) => {
 	try {
 		const servise = new Service({
-			image: `uploads/${req.file.filename}`,
+			// image: `uploads/${req.file.filename}`,
 			title: req.body.title,
 			type: req.body.type,
 			price: req.body.price
 		});
 
 		const saved = await servise.save();
-		res.redirect(`${frontend}/${admin_url}`)
-		// res.status(200).json(saved);	
+	res.redirect(`http://ximchistka24.uz/${admin_url}`)
+		// res.status(200).json(saved);
 	}
 	catch (err) {
 		res.status(400).json({
@@ -81,7 +81,8 @@ router.post('/', upload.single('image'), async (req, res) => {
 	}
 });
 
-router.patch('/:id', async (req, res) => {
+
+router.post('/:id', async (req, res) => {
 	try {
 		const update = await Service.findByIdAndUpdate(req.params.id,
 			{
@@ -93,7 +94,9 @@ router.patch('/:id', async (req, res) => {
 			}, { new: true }
 		);
 
-		res.status(200).json(update);
+		const saved = await update.save()
+	res.redirect(`http://ximchistka24.uz/${admin_url}`)
+		// res.status(200).json(update);
 	}
 	catch (err) {
 		res.status(400).json({
@@ -118,26 +121,28 @@ router.patch('/image/:id', upload.single('image'), async (req, res) => {
 			message: err.message
 		});
 	}
-});
+})
 
-router.delete('/:id', async (req, res) => {
-	try {
-		const servise = await Service.findById(req.params.id);
-		deleteFile(servise.image);
-		await servise.remove();
+// Delete post/////////////////////////////////
+// router.post('/:id', async (req, res) => {
+// 	try {
+// 		const servise = await Service.findByIdAndUpdate(req.params.id);
+// 		// deleteFile(servise.image);
+// 		// await servise.remove();
 
-		res.status(200).json({
-			success: true,
-			message: "Xizmat muvaffaqiyatli o'chirildi!"
-		});
-	}
-	catch (err) {
-		res.status(400).json({
-			success: false,
-			message: err.message
-		});
-	}
-});
+// 	res.redirect(`http://ximchistka24.uz/${admin_url}`)
+// 		// res.status(200).json({
+// 		// 	success: true,
+// 		// 	message: "Xizmat muvaffaqiyatli o'chirildi!"
+// 		// });
+// 	}
+// 	catch (err) {
+// 		res.status(400).json({
+// 			success: false,
+// 			message: err.message
+// 		});
+// 	}
+// });
 
 
 module.exports = router;
